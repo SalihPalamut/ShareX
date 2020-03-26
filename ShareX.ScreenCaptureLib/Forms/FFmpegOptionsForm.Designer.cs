@@ -48,6 +48,9 @@
             this.lblx264Preset = new System.Windows.Forms.Label();
             this.lblXvidQscale = new System.Windows.Forms.Label();
             this.gbFFmpegExe = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.watermark_opacity_text = new System.Windows.Forms.Label();
+            this.watermark_opacity = new System.Windows.Forms.TrackBar();
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnFFmpegBrowse = new System.Windows.Forms.Button();
             this.txtFFmpegPath = new System.Windows.Forms.TextBox();
@@ -87,12 +90,12 @@
             this.tcFFmpegAudioCodecs = new System.Windows.Forms.TabControl();
             this.tpAAC = new System.Windows.Forms.TabPage();
             this.lblAACQuality = new System.Windows.Forms.Label();
+            this.tpOpus = new System.Windows.Forms.TabPage();
+            this.lblOpusQuality = new System.Windows.Forms.Label();
             this.tpVorbis = new System.Windows.Forms.TabPage();
             this.lblVorbisQuality = new System.Windows.Forms.Label();
             this.tpMP3 = new System.Windows.Forms.TabPage();
             this.lblMP3Quality = new System.Windows.Forms.Label();
-            this.tpOpus = new System.Windows.Forms.TabPage();
-            this.lblOpusQuality = new System.Windows.Forms.Label();
             this.cboVideoSource = new System.Windows.Forms.ComboBox();
             this.lblVideoSource = new System.Windows.Forms.Label();
             this.cboAudioSource = new System.Windows.Forms.ComboBox();
@@ -105,6 +108,24 @@
             this.btnInstallHelperDevices = new System.Windows.Forms.Button();
             this.btnRefreshSources = new System.Windows.Forms.Button();
             this.gbCodecs = new System.Windows.Forms.GroupBox();
+            this.WaterMark = new System.Windows.Forms.GroupBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.watermark_Y = new System.Windows.Forms.NumericUpDown();
+            this.watermark_X = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.watermark_location_right = new System.Windows.Forms.RadioButton();
+            this.watermark_location_left = new System.Windows.Forms.RadioButton();
+            this.watermark_location_top = new System.Windows.Forms.RadioButton();
+            this.watermark_location_bottom = new System.Windows.Forms.RadioButton();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.watermark_show = new System.Windows.Forms.PictureBox();
+            this.watermark_use = new System.Windows.Forms.CheckBox();
             this.eiFFmpeg = new ShareX.HelpersLib.ExportImportControl();
             ((System.ComponentModel.ISupportInitialize)(this.nudx264CRF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudXvidQscale)).BeginInit();
@@ -115,6 +136,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbx264PresetWarning)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbOpusBitrate)).BeginInit();
             this.gbFFmpegExe.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_opacity)).BeginInit();
             this.gbCommandLinePreview.SuspendLayout();
             this.gbCommandLineArgs.SuspendLayout();
             this.tcFFmpegVideoCodecs.SuspendLayout();
@@ -130,11 +153,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudQSVBitrate)).BeginInit();
             this.tcFFmpegAudioCodecs.SuspendLayout();
             this.tpAAC.SuspendLayout();
+            this.tpOpus.SuspendLayout();
             this.tpVorbis.SuspendLayout();
             this.tpMP3.SuspendLayout();
-            this.tpOpus.SuspendLayout();
             this.gbSource.SuspendLayout();
             this.gbCodecs.SuspendLayout();
+            this.WaterMark.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_Y)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_X)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_show)).BeginInit();
             this.SuspendLayout();
             // 
             // lblx264CRF
@@ -315,6 +347,28 @@
             resources.ApplyResources(this.gbFFmpegExe, "gbFFmpegExe");
             this.gbFFmpegExe.Name = "gbFFmpegExe";
             this.gbFFmpegExe.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.watermark_opacity_text);
+            this.groupBox3.Controls.Add(this.watermark_opacity);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // watermark_opacity_text
+            // 
+            resources.ApplyResources(this.watermark_opacity_text, "watermark_opacity_text");
+            this.watermark_opacity_text.Name = "watermark_opacity_text";
+            // 
+            // watermark_opacity
+            // 
+            resources.ApplyResources(this.watermark_opacity, "watermark_opacity");
+            this.watermark_opacity.Maximum = 100;
+            this.watermark_opacity.Name = "watermark_opacity";
+            this.ttHelpTip.SetToolTip(this.watermark_opacity, resources.GetString("watermark_opacity.ToolTip"));
+            this.watermark_opacity.Value = 50;
+            this.watermark_opacity.Scroll += new System.EventHandler(this.opacity_Scroll);
             // 
             // btnDownload
             // 
@@ -648,6 +702,19 @@
             resources.ApplyResources(this.lblAACQuality, "lblAACQuality");
             this.lblAACQuality.Name = "lblAACQuality";
             // 
+            // tpOpus
+            // 
+            this.tpOpus.Controls.Add(this.tbOpusBitrate);
+            this.tpOpus.Controls.Add(this.lblOpusQuality);
+            resources.ApplyResources(this.tpOpus, "tpOpus");
+            this.tpOpus.Name = "tpOpus";
+            this.tpOpus.UseVisualStyleBackColor = true;
+            // 
+            // lblOpusQuality
+            // 
+            resources.ApplyResources(this.lblOpusQuality, "lblOpusQuality");
+            this.lblOpusQuality.Name = "lblOpusQuality";
+            // 
             // tpVorbis
             // 
             this.tpVorbis.BackColor = System.Drawing.SystemColors.Window;
@@ -673,19 +740,6 @@
             // 
             resources.ApplyResources(this.lblMP3Quality, "lblMP3Quality");
             this.lblMP3Quality.Name = "lblMP3Quality";
-            // 
-            // tpOpus
-            // 
-            this.tpOpus.Controls.Add(this.tbOpusBitrate);
-            this.tpOpus.Controls.Add(this.lblOpusQuality);
-            resources.ApplyResources(this.tpOpus, "tpOpus");
-            this.tpOpus.Name = "tpOpus";
-            this.tpOpus.UseVisualStyleBackColor = true;
-            // 
-            // lblOpusQuality
-            // 
-            resources.ApplyResources(this.lblOpusQuality, "lblOpusQuality");
-            this.lblOpusQuality.Name = "lblOpusQuality";
             // 
             // cboVideoSource
             // 
@@ -779,6 +833,136 @@
             this.gbCodecs.Name = "gbCodecs";
             this.gbCodecs.TabStop = false;
             // 
+            // WaterMark
+            // 
+            this.WaterMark.Controls.Add(this.groupBox3);
+            this.WaterMark.Controls.Add(this.groupBox2);
+            this.WaterMark.Controls.Add(this.groupBox1);
+            this.WaterMark.Controls.Add(this.panel3);
+            resources.ApplyResources(this.WaterMark, "WaterMark");
+            this.WaterMark.Name = "WaterMark";
+            this.WaterMark.TabStop = false;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.watermark_Y);
+            this.groupBox2.Controls.Add(this.watermark_X);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.label1);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.TabStop = false;
+            // 
+            // watermark_Y
+            // 
+            resources.ApplyResources(this.watermark_Y, "watermark_Y");
+            this.watermark_Y.Name = "watermark_Y";
+            this.watermark_Y.ValueChanged += new System.EventHandler(this.watermark_location_CheckedChanged);
+            // 
+            // watermark_X
+            // 
+            resources.ApplyResources(this.watermark_X, "watermark_X");
+            this.watermark_X.Name = "watermark_X";
+            this.watermark_X.ValueChanged += new System.EventHandler(this.watermark_location_CheckedChanged);
+            // 
+            // label4
+            // 
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.Name = "label4";
+            // 
+            // label3
+            // 
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.Name = "label3";
+            // 
+            // label2
+            // 
+            resources.ApplyResources(this.label2, "label2");
+            this.label2.Name = "label2";
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.panel1);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.TabStop = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.watermark_location_top);
+            this.panel1.Controls.Add(this.watermark_location_bottom);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.watermark_location_right);
+            this.panel2.Controls.Add(this.watermark_location_left);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // watermark_location_right
+            // 
+            resources.ApplyResources(this.watermark_location_right, "watermark_location_right");
+            this.watermark_location_right.Name = "watermark_location_right";
+            this.watermark_location_right.Tag = "";
+            this.watermark_location_right.UseVisualStyleBackColor = true;
+            this.watermark_location_right.CheckedChanged += new System.EventHandler(this.watermark_location_CheckedChanged);
+            // 
+            // watermark_location_left
+            // 
+            resources.ApplyResources(this.watermark_location_left, "watermark_location_left");
+            this.watermark_location_left.Name = "watermark_location_left";
+            this.watermark_location_left.Tag = "";
+            this.watermark_location_left.UseVisualStyleBackColor = true;
+            this.watermark_location_left.CheckedChanged += new System.EventHandler(this.watermark_location_CheckedChanged);
+            // 
+            // watermark_location_top
+            // 
+            resources.ApplyResources(this.watermark_location_top, "watermark_location_top");
+            this.watermark_location_top.Name = "watermark_location_top";
+            this.watermark_location_top.Tag = "";
+            this.watermark_location_top.UseVisualStyleBackColor = true;
+            this.watermark_location_top.CheckedChanged += new System.EventHandler(this.watermark_location_CheckedChanged);
+            // 
+            // watermark_location_bottom
+            // 
+            resources.ApplyResources(this.watermark_location_bottom, "watermark_location_bottom");
+            this.watermark_location_bottom.Name = "watermark_location_bottom";
+            this.watermark_location_bottom.Tag = "";
+            this.watermark_location_bottom.UseVisualStyleBackColor = true;
+            this.watermark_location_bottom.CheckedChanged += new System.EventHandler(this.watermark_location_CheckedChanged);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.watermark_show);
+            this.panel3.Controls.Add(this.watermark_use);
+            resources.ApplyResources(this.panel3, "panel3");
+            this.panel3.Name = "panel3";
+            // 
+            // watermark_show
+            // 
+            this.watermark_show.Cursor = System.Windows.Forms.Cursors.Hand;
+            resources.ApplyResources(this.watermark_show, "watermark_show");
+            this.watermark_show.Name = "watermark_show";
+            this.watermark_show.TabStop = false;
+            this.watermark_show.MouseClick += new System.Windows.Forms.MouseEventHandler(this.watermark_chose_MouseClick);
+            // 
+            // watermark_use
+            // 
+            resources.ApplyResources(this.watermark_use, "watermark_use");
+            this.watermark_use.Name = "watermark_use";
+            this.watermark_use.UseVisualStyleBackColor = true;
+            this.watermark_use.CheckedChanged += new System.EventHandler(this.watermark_use_CheckedChanged);
+            // 
             // eiFFmpeg
             // 
             this.eiFFmpeg.DefaultFileName = null;
@@ -793,6 +977,7 @@
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
+            this.Controls.Add(this.WaterMark);
             this.Controls.Add(this.cbOverrideFFmpegPath);
             this.Controls.Add(this.eiFFmpeg);
             this.Controls.Add(this.gbCodecs);
@@ -818,6 +1003,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbOpusBitrate)).EndInit();
             this.gbFFmpegExe.ResumeLayout(false);
             this.gbFFmpegExe.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_opacity)).EndInit();
             this.gbCommandLinePreview.ResumeLayout(false);
             this.gbCommandLinePreview.PerformLayout();
             this.gbCommandLineArgs.ResumeLayout(false);
@@ -843,16 +1031,29 @@
             this.tcFFmpegAudioCodecs.ResumeLayout(false);
             this.tpAAC.ResumeLayout(false);
             this.tpAAC.PerformLayout();
+            this.tpOpus.ResumeLayout(false);
+            this.tpOpus.PerformLayout();
             this.tpVorbis.ResumeLayout(false);
             this.tpVorbis.PerformLayout();
             this.tpMP3.ResumeLayout(false);
             this.tpMP3.PerformLayout();
-            this.tpOpus.ResumeLayout(false);
-            this.tpOpus.PerformLayout();
             this.gbSource.ResumeLayout(false);
             this.gbSource.PerformLayout();
             this.gbCodecs.ResumeLayout(false);
             this.gbCodecs.PerformLayout();
+            this.WaterMark.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_Y)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_X)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_show)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -936,5 +1137,26 @@
         private System.Windows.Forms.TabPage tpOpus;
         private System.Windows.Forms.TrackBar tbOpusBitrate;
         private System.Windows.Forms.Label lblOpusQuality;
+        private System.Windows.Forms.GroupBox WaterMark;
+        private System.Windows.Forms.PictureBox watermark_show;
+        private System.Windows.Forms.CheckBox watermark_use;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton watermark_location_right;
+        private System.Windows.Forms.RadioButton watermark_location_left;
+        private System.Windows.Forms.RadioButton watermark_location_bottom;
+        private System.Windows.Forms.RadioButton watermark_location_top;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown watermark_Y;
+        private System.Windows.Forms.NumericUpDown watermark_X;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label watermark_opacity_text;
+        private System.Windows.Forms.TrackBar watermark_opacity;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel3;
     }
 }

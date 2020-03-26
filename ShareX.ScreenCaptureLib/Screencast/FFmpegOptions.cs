@@ -56,7 +56,13 @@ namespace ShareX.ScreenCaptureLib
         public FFmpegAMFQuality AMF_quality { get; set; } = FFmpegAMFQuality.speed;
         public FFmpegQSVPreset QSV_preset { get; set; } = FFmpegQSVPreset.fast;
         public int QSV_bitrate { get; set; } = 3000;
-
+        //WaterMark
+        public bool WaterMarkUse { get; set; }
+        public int WaterMark_X { get; set; }
+        public int WaterMark_Y { get; set; }
+        public bool WaterMark_location_Top { get; set; }
+        public bool WaterMark_location_Left { get; set; }
+        public int WaterMark_Opacity { get; set; }
         // Audio
         public int AAC_bitrate { get; set; } = 128; // kbit/s
         public int Opus_bitrate { get; set; } = 128; //kbit/s

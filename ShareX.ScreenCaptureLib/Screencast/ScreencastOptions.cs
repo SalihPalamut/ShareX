@@ -113,24 +113,39 @@ namespace ShareX.ScreenCaptureLib
                             fps, isCustom ? "$area_x$" : CaptureArea.X.ToString(), isCustom ? "$area_y$" : CaptureArea.Y.ToString(),
                             isCustom ? "$area_width$" : CaptureArea.Width.ToString(), isCustom ? "$area_height$" : CaptureArea.Height.ToString(),
                             isCustom ? "$cursor$" : DrawCursor ? "1" : "0");
-
-                        if (FFmpeg.IsAudioSourceSelected)
-                        {
-                            args.AppendFormat("-f dshow -i audio=\"{0}\" ", FFmpeg.AudioSource);
-                        }
-                    }
+                     }
                     else
                     {
-                        args.AppendFormat("-f dshow -framerate {0} -i video=\"{1}\"", fps, FFmpeg.VideoSource);
-
-                        if (FFmpeg.IsAudioSourceSelected)
+                        args.AppendFormat("-f dshow -framerate {0} -i video=\"{1}\" ", fps, FFmpeg.VideoSource);
+                    }
+                    //https://stackoverflow.com/questions/10918907/how-to-add-transparent-watermark-in-center-of-a-video-with-ffmpeg
+                    //https://stackoverflow.com/questions/47989621/ffmpeg-add-watermark-libx264-width-not-divisible-by-2-853x480
+                    //https://stackoverflow.com/questions/44568887/ffmpeg-overlay-image-and-lower-transparency
+                    if (FFmpeg.WaterMarkUse)
+                    {
+                        string set_watermark = " -i Logo.png -filter_complex [0]scale='iw-mod(iw,2)':'ih-mod(ih,2)'[a];[1]format=argb,colorchannelmixer=aa=";
+                        set_watermark += (FFmpeg.WaterMark_Opacity / 100.0).ToString().Replace(",", ".") + "[b];[a][b]\"overlay=";
+                        if (FFmpeg.WaterMark_location_Top)
                         {
-                            args.AppendFormat(":audio=\"{0}\" ", FFmpeg.AudioSource);
+                            if (FFmpeg.WaterMark_location_Left)
+                                set_watermark += FFmpeg.WaterMark_X.ToString() + ":" + FFmpeg.WaterMark_Y.ToString();
+                            else
+                                set_watermark += "W-w-" + FFmpeg.WaterMark_X.ToString() + ":" + FFmpeg.WaterMark_Y.ToString();
                         }
                         else
                         {
-                            args.Append(" ");
+                            if (FFmpeg.WaterMark_location_Left)
+                                set_watermark += FFmpeg.WaterMark_X.ToString() + ":H-h-" + FFmpeg.WaterMark_Y.ToString();
+                            else
+                                set_watermark += "W-w-" + FFmpeg.WaterMark_X.ToString() + ":H-h-" + FFmpeg.WaterMark_Y.ToString();
+
                         }
+                        set_watermark += "\" ";
+                        args.Append(set_watermark);
+                    }
+                    if (FFmpeg.IsAudioSourceSelected)
+                    {
+                        args.AppendFormat("-f dshow -i audio=\"{0}\" ", FFmpeg.AudioSource);
                     }
                 }
                 else if (FFmpeg.IsAudioSourceSelected)

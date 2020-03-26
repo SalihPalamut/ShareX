@@ -43,6 +43,7 @@ namespace ShareX.ScreenCaptureLib
 
         private bool settingsLoaded;
 
+        private string logo;
         public FFmpegOptionsForm(ScreencastOptions options)
         {
             Options = options;
@@ -136,6 +137,20 @@ namespace ShareX.ScreenCaptureLib
             {
                 txtCommandLinePreview.Text = Options.FFmpeg.CustomCommands;
             }
+
+            //WaterMark Settings
+            logo = Path.Combine(DefaultToolsFolder, "Logo.png");
+            if (File.Exists(logo))
+                watermark_show.Image = new Bitmap(logo);
+            watermark_use.Checked = Options.FFmpeg.WaterMarkUse;
+            watermark_X.Value = Options.FFmpeg.WaterMark_X;
+            watermark_Y.Value = Options.FFmpeg.WaterMark_Y;
+            watermark_location_top.Checked = Options.FFmpeg.WaterMark_location_Top;
+            watermark_location_bottom.Checked = !watermark_location_top.Checked;
+            watermark_location_left.Checked = Options.FFmpeg.WaterMark_location_Left;
+            watermark_location_right.Checked = !Options.FFmpeg.WaterMark_location_Left;
+            watermark_opacity.Value = Options.FFmpeg.WaterMark_Opacity;
+            watermark_opacity_text.Text = "%" + watermark_opacity.Value;
 
             settingsLoaded = true;
 
@@ -598,6 +613,56 @@ namespace ShareX.ScreenCaptureLib
                 Options.FFmpeg = ffmpegOptions;
                 Options.FFmpeg.CLIPath = tempFFmpegPath;
                 await SettingsLoad();
+            }
+        }
+
+        private void watermark_chose_MouseClick(object sender, MouseEventArgs e)
+        {
+            OpenFileDialog Fl = new OpenFileDialog();
+            Fl.Filter = "Image Files(*.png)|*.png";
+            Fl.FileName = "Logo.png";
+            Fl.Title = "Chose Watermark";
+            Fl.DefaultExt = ".png";
+            if (Fl.ShowDialog() == DialogResult.OK)
+            {
+                if (watermark_show.Image != null)
+                    watermark_show.Image.Dispose();
+
+                File.Copy(Fl.FileName, logo, true);
+                watermark_show.Image = new Bitmap(logo);
+            }
+        }
+
+        private void watermark_location_CheckedChanged(object sender, EventArgs e)
+        {
+            if (settingsLoaded)
+            {
+                Options.FFmpeg.WaterMark_location_Top = watermark_location_top.Checked;
+                Options.FFmpeg.WaterMark_location_Left = watermark_location_left.Checked;
+                Options.FFmpeg.WaterMark_X = (int)watermark_X.Value;
+                Options.FFmpeg.WaterMark_Y = (int)watermark_Y.Value;
+                UpdateUI();
+            }
+
+        }
+
+        private void watermark_use_CheckedChanged(object sender, EventArgs e)
+        {
+            watermark_show.Enabled = watermark_use.Checked;
+            groupBox1.Enabled = watermark_use.Checked;
+            groupBox2.Enabled = watermark_use.Checked;
+            groupBox3.Enabled = watermark_use.Checked;
+            Options.FFmpeg.WaterMarkUse = watermark_use.Checked;
+            UpdateUI();
+        }
+
+        private void opacity_Scroll(object sender, EventArgs e)
+        {
+            if (settingsLoaded)
+            {
+                watermark_opacity_text.Text = "%" + watermark_opacity.Value;
+                Options.FFmpeg.WaterMark_Opacity = watermark_opacity.Value;
+                UpdateUI();
             }
         }
     }
