@@ -60,7 +60,7 @@ namespace ShareX.ScreenCaptureLib
         public bool IsEditorMode => Mode == RegionCaptureMode.Editor || Mode == RegionCaptureMode.TaskEditor;
         public bool IsAnnotationMode => Mode == RegionCaptureMode.Annotation || IsEditorMode;
         public bool IsModified => ShapeManager != null && ShapeManager.IsModified;
-
+        public bool Closable { get; set; } = true;
         public Point CurrentPosition { get; private set; }
         public Point PanningStrech = new Point();
 
@@ -70,7 +70,7 @@ namespace ShareX.ScreenCaptureLib
 
         internal ShapeManager ShapeManager { get; private set; }
         internal bool IsClosing { get; private set; }
-
+        private Size _tmpSize;
         internal Bitmap DimmedCanvas;
         internal Image CustomNodeImage = Resources.CircleNode;
         internal int ToolbarHeight;
@@ -270,7 +270,14 @@ namespace ShareX.ScreenCaptureLib
             ShapeManager = new ShapeManager(this);
             ShapeManager.WindowCaptureMode = !IsEditorMode && Options.DetectWindows;
             ShapeManager.IncludeControls = Options.DetectControls;
-
+            ShapeManager.CollapsedToolbarClicked += (s, ev) =>
+            {
+                if (!ShapeManager.ToolbarCollapsed)
+                {
+                    this.Size = _tmpSize;
+                    InitBackground(new Screenshot().CaptureFullscreen());
+                }
+            };
             InitBackground(canvas);
 
             if (Mode == RegionCaptureMode.OneClick || ShapeManager.WindowCaptureMode)
@@ -327,7 +334,7 @@ namespace ShareX.ScreenCaptureLib
             {
                 DimmedCanvas?.Dispose();
                 DimmedCanvas = (Bitmap)Canvas.Clone();
-                
+
                 using (Graphics g = Graphics.FromImage(DimmedCanvas))
                 using (Brush brush = new SolidBrush(Color.FromArgb(30, Color.Black)))
                 {
@@ -592,8 +599,15 @@ namespace ShareX.ScreenCaptureLib
         internal void CloseWindow(RegionResult result = RegionResult.Close)
         {
             Result = result;
-            forceClose = true;
-            Close();
+            if (Closable)
+            {
+                forceClose = true;
+                Close();
+                return;
+            }
+            _tmpSize = this.Size;
+            this.Size = new Size(0, 0);
+            ShapeManager.CollapsedToolbar(null, null);
         }
 
         internal void Pause()

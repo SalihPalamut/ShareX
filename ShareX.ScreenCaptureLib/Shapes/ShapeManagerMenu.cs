@@ -36,6 +36,9 @@ namespace ShareX.ScreenCaptureLib
     {
         public bool ToolbarCreated { get; private set; }
         public bool ToolbarCollapsed { get; private set; }
+        public Size Size { get; private set; }
+
+        public event EventHandler CollapsedToolbarClicked;
 
         internal TextAnimation MenuTextAnimation = new TextAnimation()
         {
@@ -57,6 +60,7 @@ namespace ShareX.ScreenCaptureLib
 
         internal void CreateToolbar()
         {
+            if (ToolbarCreated) return;
             menuForm = new Form()
             {
                 AutoScaleDimensions = new SizeF(6F, 13F),
@@ -71,7 +75,7 @@ namespace ShareX.ScreenCaptureLib
                 Text = "ShareX - " + Resources.ShapeManager_CreateToolbar_AnnotateMenu,
                 TopMost = Form.IsFullscreen
             };
-
+            
             menuForm.Shown += MenuForm_Shown;
             menuForm.KeyDown += MenuForm_KeyDown;
             menuForm.KeyUp += MenuForm_KeyUp;
@@ -1056,6 +1060,8 @@ namespace ShareX.ScreenCaptureLib
 
             menuForm.Show(Form);
 
+            Size = menuForm.Size;
+
             UpdateMenu();
 
             CurrentShapeChanged += shape => UpdateMenu();
@@ -1129,12 +1135,18 @@ namespace ShareX.ScreenCaptureLib
             }
             else if (e.Button == MouseButtons.Right)
             {
-                SetMenuCollapsed(!ToolbarCollapsed);
-                CheckMenuPosition();
+                CollapsedToolbar(sender, e);
+                DeleteAllShapes();
             }
         }
-
-        private void ConfigureMenuState()
+       
+        public void CollapsedToolbar(object sender, MouseEventArgs e)
+        {
+            SetMenuCollapsed(!ToolbarCollapsed);
+            CheckMenuPosition();
+            CollapsedToolbarClicked?.Invoke(sender, e);
+        }
+    private void ConfigureMenuState()
         {
             if (!Form.IsEditorMode && Options.RememberMenuState)
             {

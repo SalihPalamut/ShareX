@@ -51,6 +51,7 @@
             this.tsmiRectangleTransparent = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiLastRegion = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScreenRecordingFFmpeg = new System.Windows.Forms.ToolStripMenuItem();
+            this.screenRecordingWithAnnotationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScreenRecordingGIF = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiScrollingCapture = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiTextCapture = new System.Windows.Forms.ToolStripMenuItem();
@@ -292,6 +293,7 @@
             this.tsbPatreon = new System.Windows.Forms.ToolStripButton();
             this.tsbBitcoin = new System.Windows.Forms.ToolStripButton();
             this.tsbGitHub = new System.Windows.Forms.ToolStripButton();
+            this.screenRecordingWithAnnotationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.scMain)).BeginInit();
             this.scMain.Panel1.SuspendLayout();
             this.scMain.Panel2.SuspendLayout();
@@ -404,6 +406,7 @@
             resources.ApplyResources(this.tsMain, "tsMain");
             this.tsMain.DrawCustomBorder = true;
             this.tsMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tsMain.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsddbCapture,
             this.tsddbUpload,
@@ -441,6 +444,7 @@
             this.tsmiRectangleTransparent,
             this.tsmiLastRegion,
             this.tsmiScreenRecordingFFmpeg,
+            this.screenRecordingWithAnnotationToolStripMenuItem,
             this.tsmiScreenRecordingGIF,
             this.tsmiScrollingCapture,
             this.tsmiTextCapture,
@@ -506,6 +510,13 @@
             this.tsmiScreenRecordingFFmpeg.Name = "tsmiScreenRecordingFFmpeg";
             resources.ApplyResources(this.tsmiScreenRecordingFFmpeg, "tsmiScreenRecordingFFmpeg");
             this.tsmiScreenRecordingFFmpeg.Click += new System.EventHandler(this.tsmiScreenRecordingFFmpeg_Click);
+            // 
+            // screenRecordingWithAnnotationToolStripMenuItem
+            // 
+            this.screenRecordingWithAnnotationToolStripMenuItem.Image = global::ShareX.Properties.Resources.camcorder_pencil;
+            this.screenRecordingWithAnnotationToolStripMenuItem.Name = "screenRecordingWithAnnotationToolStripMenuItem";
+            resources.ApplyResources(this.screenRecordingWithAnnotationToolStripMenuItem, "screenRecordingWithAnnotationToolStripMenuItem");
+            this.screenRecordingWithAnnotationToolStripMenuItem.Click += new System.EventHandler(this.screenRecordingWithAnnotationToolStripMenuItem_Click);
             // 
             // tsmiScreenRecordingGIF
             // 
@@ -1017,6 +1028,7 @@
             // 
             // cmsTaskInfo
             // 
+            this.cmsTaskInfo.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsTaskInfo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiShowErrors,
             this.tsmiStopUpload,
@@ -1562,6 +1574,7 @@
             // 
             // cmsTray
             // 
+            this.cmsTray.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsTray.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiTrayCapture,
             this.tsmiTrayUpload,
@@ -1603,6 +1616,7 @@
             this.tsmiTrayRectangleTransparent,
             this.tsmiTrayLastRegion,
             this.tsmiTrayScreenRecordingFFmpeg,
+            this.screenRecordingWithAnnotationToolStripMenuItem1,
             this.tsmiTrayScreenRecordingGIF,
             this.tsmiTrayScrollingCapture,
             this.tsmiTrayTextCapture,
@@ -2330,6 +2344,13 @@
             this.tsbGitHub.Padding = new System.Windows.Forms.Padding(1);
             this.tsbGitHub.Click += new System.EventHandler(this.TsbGitHub_Click);
             // 
+            // screenRecordingWithAnnotationToolStripMenuItem1
+            // 
+            this.screenRecordingWithAnnotationToolStripMenuItem1.Image = global::ShareX.Properties.Resources.camcorder_pencil;
+            this.screenRecordingWithAnnotationToolStripMenuItem1.Name = "screenRecordingWithAnnotationToolStripMenuItem1";
+            resources.ApplyResources(this.screenRecordingWithAnnotationToolStripMenuItem1, "screenRecordingWithAnnotationToolStripMenuItem1");
+            this.screenRecordingWithAnnotationToolStripMenuItem1.Click += new System.EventHandler(this.screenRecordingWithAnnotationToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -2634,5 +2655,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayImageSplitter;
         private System.Windows.Forms.ToolStripMenuItem tsmiVideoConverter;
         private System.Windows.Forms.ToolStripMenuItem tsmiTrayVideoConverter;
+        private System.Windows.Forms.ToolStripMenuItem screenRecordingWithAnnotationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem screenRecordingWithAnnotationToolStripMenuItem1;
     }
 }

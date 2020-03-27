@@ -52,7 +52,7 @@ namespace ShareX
         private Rectangle borderRectangle0Based;
         private bool activateWindow;
         private float duration;
-
+        public ScreenRecordForm() { }
         public ScreenRecordForm(Rectangle regionRectangle, TaskSettings taskSettings, bool activateWindow = true, float duration = 0)
         {
             InitializeComponent();

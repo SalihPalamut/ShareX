@@ -2498,6 +2498,12 @@ namespace ShareX
             UpdateMainWindowLayout();
         }
 
+        private void screenRecordingWithAnnotationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TaskHelpers.StartScreenRecording(ScreenRecordOutput.FFmpeg, ScreenRecordStartMethod.Region);
+            new RecordAnnotation().Capture(true);
+        }
+
         private void TsmiThumbnailTitleHide_Click(object sender, EventArgs e)
         {
             Program.Settings.ShowThumbnailTitle = false;

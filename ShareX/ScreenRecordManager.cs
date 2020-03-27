@@ -39,7 +39,7 @@ namespace ShareX
         public static bool IsRecording { get; private set; }
 
         private static ScreenRecorder screenRecorder;
-        private static ScreenRecordForm recordForm;
+        public static ScreenRecordForm recordForm;
 
         public static void StartStopRecording(ScreenRecordOutput outputType, ScreenRecordStartMethod startMethod, TaskSettings taskSettings)
         {
