@@ -247,16 +247,16 @@ namespace ShareX.ScreenCaptureLib
                         img = Resources.pencil;
                         break;
                     case ShapeType.DrawingLine:
-                        img = Resources.layer_shape_line;
+                        img = ShareXResources.IsDarkTheme ? Resources.layer_shape_line_white : Resources.layer_shape_line;
                         break;
                     case ShapeType.DrawingArrow:
-                        img = Resources.layer_shape_arrow;
+                        img = ShareXResources.IsDarkTheme ? Resources.layer_shape_arrow_white : Resources.layer_shape_arrow;
                         break;
                     case ShapeType.DrawingTextOutline:
-                        img = Resources.edit_outline;
+                        img = ShareXResources.IsDarkTheme ? Resources.edit_outline_white : Resources.edit_outline;
                         break;
                     case ShapeType.DrawingTextBackground:
-                        img = Resources.edit_shade;
+                        img = ShareXResources.IsDarkTheme ? Resources.edit_shade_white : Resources.edit_shade;
                         break;
                     case ShapeType.DrawingSpeechBalloon:
                         img = Resources.balloon_box_left;
@@ -290,10 +290,10 @@ namespace ShareX.ScreenCaptureLib
                         img = Resources.eraser;
                         break;
                     case ShapeType.EffectBlur:
-                        img = Resources.layer_shade;
+                        img = ShareXResources.IsDarkTheme ? Resources.layer_shade_white : Resources.layer_shade;
                         break;
                     case ShapeType.EffectPixelate:
-                        img = Resources.grid;
+                        img = ShareXResources.IsDarkTheme ? Resources.grid_white : Resources.grid;
                         break;
                     case ShapeType.EffectHighlight:
                         img = Resources.highlighter_text;
