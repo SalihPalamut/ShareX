@@ -665,5 +665,10 @@ namespace ShareX.ScreenCaptureLib
                 UpdateUI();
             }
         }
+
+        private void tbAACBitrate_Scroll(object sender, EventArgs e)
+        {
+
+        }
     }
 }

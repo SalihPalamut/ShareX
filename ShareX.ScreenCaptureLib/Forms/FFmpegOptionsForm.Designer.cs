@@ -43,17 +43,17 @@
             this.pbAudioCodecWarning = new System.Windows.Forms.PictureBox();
             this.pbx264PresetWarning = new System.Windows.Forms.PictureBox();
             this.tbOpusBitrate = new System.Windows.Forms.TrackBar();
+            this.watermark_opacity = new System.Windows.Forms.TrackBar();
             this.lblCodec = new System.Windows.Forms.Label();
             this.cboVideoCodec = new System.Windows.Forms.ComboBox();
             this.lblx264Preset = new System.Windows.Forms.Label();
             this.lblXvidQscale = new System.Windows.Forms.Label();
             this.gbFFmpegExe = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.watermark_opacity_text = new System.Windows.Forms.Label();
-            this.watermark_opacity = new System.Windows.Forms.TrackBar();
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnFFmpegBrowse = new System.Windows.Forms.Button();
             this.txtFFmpegPath = new System.Windows.Forms.TextBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.watermark_opacity_text = new System.Windows.Forms.Label();
             this.cbOverrideFFmpegPath = new System.Windows.Forms.CheckBox();
             this.gbCommandLinePreview = new System.Windows.Forms.GroupBox();
             this.cbCustomCommands = new System.Windows.Forms.CheckBox();
@@ -135,9 +135,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbAudioCodecWarning)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx264PresetWarning)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbOpusBitrate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_opacity)).BeginInit();
             this.gbFFmpegExe.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.watermark_opacity)).BeginInit();
             this.gbCommandLinePreview.SuspendLayout();
             this.gbCommandLineArgs.SuspendLayout();
             this.tcFFmpegVideoCodecs.SuspendLayout();
@@ -267,6 +267,7 @@
             this.tbAACBitrate.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.ttHelpTip.SetToolTip(this.tbAACBitrate, resources.GetString("tbAACBitrate.ToolTip"));
             this.tbAACBitrate.Value = 4;
+            this.tbAACBitrate.Scroll += new System.EventHandler(this.tbAACBitrate_Scroll);
             this.tbAACBitrate.ValueChanged += new System.EventHandler(this.tbAACBitrate_ValueChanged);
             // 
             // cbGIFStatsMode
@@ -316,6 +317,15 @@
             this.tbOpusBitrate.Value = 4;
             this.tbOpusBitrate.ValueChanged += new System.EventHandler(this.tbOpusBirate_ValueChanged);
             // 
+            // watermark_opacity
+            // 
+            resources.ApplyResources(this.watermark_opacity, "watermark_opacity");
+            this.watermark_opacity.Maximum = 100;
+            this.watermark_opacity.Name = "watermark_opacity";
+            this.ttHelpTip.SetToolTip(this.watermark_opacity, resources.GetString("watermark_opacity.ToolTip"));
+            this.watermark_opacity.Value = 50;
+            this.watermark_opacity.Scroll += new System.EventHandler(this.opacity_Scroll);
+            // 
             // lblCodec
             // 
             resources.ApplyResources(this.lblCodec, "lblCodec");
@@ -348,28 +358,6 @@
             this.gbFFmpegExe.Name = "gbFFmpegExe";
             this.gbFFmpegExe.TabStop = false;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.watermark_opacity_text);
-            this.groupBox3.Controls.Add(this.watermark_opacity);
-            resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.TabStop = false;
-            // 
-            // watermark_opacity_text
-            // 
-            resources.ApplyResources(this.watermark_opacity_text, "watermark_opacity_text");
-            this.watermark_opacity_text.Name = "watermark_opacity_text";
-            // 
-            // watermark_opacity
-            // 
-            resources.ApplyResources(this.watermark_opacity, "watermark_opacity");
-            this.watermark_opacity.Maximum = 100;
-            this.watermark_opacity.Name = "watermark_opacity";
-            this.ttHelpTip.SetToolTip(this.watermark_opacity, resources.GetString("watermark_opacity.ToolTip"));
-            this.watermark_opacity.Value = 50;
-            this.watermark_opacity.Scroll += new System.EventHandler(this.opacity_Scroll);
-            // 
             // btnDownload
             // 
             resources.ApplyResources(this.btnDownload, "btnDownload");
@@ -389,6 +377,19 @@
             resources.ApplyResources(this.txtFFmpegPath, "txtFFmpegPath");
             this.txtFFmpegPath.Name = "txtFFmpegPath";
             this.txtFFmpegPath.TextChanged += new System.EventHandler(this.txtFFmpegPath_TextChanged);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.watermark_opacity_text);
+            this.groupBox3.Controls.Add(this.watermark_opacity);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.TabStop = false;
+            // 
+            // watermark_opacity_text
+            // 
+            resources.ApplyResources(this.watermark_opacity_text, "watermark_opacity_text");
+            this.watermark_opacity_text.Name = "watermark_opacity_text";
             // 
             // cbOverrideFFmpegPath
             // 
@@ -1001,11 +1002,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbAudioCodecWarning)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx264PresetWarning)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbOpusBitrate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.watermark_opacity)).EndInit();
             this.gbFFmpegExe.ResumeLayout(false);
             this.gbFFmpegExe.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.watermark_opacity)).EndInit();
             this.gbCommandLinePreview.ResumeLayout(false);
             this.gbCommandLinePreview.PerformLayout();
             this.gbCommandLineArgs.ResumeLayout(false);

@@ -161,6 +161,7 @@
             this.nudRegionCaptureMagnifierPixelCount = new System.Windows.Forms.NumericUpDown();
             this.nudRegionCaptureMagnifierPixelSize = new System.Windows.Forms.NumericUpDown();
             this.tpScreenRecorder = new System.Windows.Forms.TabPage();
+            this.cbScreenRecordTransparentRegion = new System.Windows.Forms.CheckBox();
             this.cbScreenRecordTwoPassEncoding = new System.Windows.Forms.CheckBox();
             this.cbScreenRecordConfirmAbort = new System.Windows.Forms.CheckBox();
             this.cbScreenRecorderShowCursor = new System.Windows.Forms.CheckBox();
@@ -248,7 +249,6 @@
             this.pgTaskSettings = new System.Windows.Forms.PropertyGrid();
             this.chkOverrideAdvancedSettings = new System.Windows.Forms.CheckBox();
             this.tttvMain = new ShareX.HelpersLib.TabToTreeView();
-            this.cbScreenRecordTransparentRegion = new System.Windows.Forms.CheckBox();
             this.tcTaskSettings.SuspendLayout();
             this.tpTask.SuspendLayout();
             this.cmsDestinations.SuspendLayout();
@@ -306,11 +306,13 @@
             // 
             // cmsAfterCapture
             // 
+            this.cmsAfterCapture.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsAfterCapture.Name = "cmsAfterCapture";
             resources.ApplyResources(this.cmsAfterCapture, "cmsAfterCapture");
             // 
             // cmsAfterUpload
             // 
+            this.cmsAfterUpload.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsAfterUpload.Name = "cmsAfterCapture";
             resources.ApplyResources(this.cmsAfterUpload, "cmsAfterUpload");
             // 
@@ -348,6 +350,7 @@
             // 
             // cmsTask
             // 
+            this.cmsTask.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsTask.Name = "cmsAfterCapture";
             resources.ApplyResources(this.cmsTask, "cmsTask");
             // 
@@ -441,6 +444,7 @@
             // 
             // cmsDestinations
             // 
+            this.cmsDestinations.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cmsDestinations.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiImageUploaders,
             this.tsmiTextUploaders,
@@ -1424,6 +1428,13 @@
             resources.ApplyResources(this.tpScreenRecorder, "tpScreenRecorder");
             this.tpScreenRecorder.Name = "tpScreenRecorder";
             // 
+            // cbScreenRecordTransparentRegion
+            // 
+            resources.ApplyResources(this.cbScreenRecordTransparentRegion, "cbScreenRecordTransparentRegion");
+            this.cbScreenRecordTransparentRegion.Name = "cbScreenRecordTransparentRegion";
+            this.cbScreenRecordTransparentRegion.UseVisualStyleBackColor = true;
+            this.cbScreenRecordTransparentRegion.CheckedChanged += new System.EventHandler(this.cbScreenRecordTransparentRegion_CheckedChanged);
+            // 
             // cbScreenRecordTwoPassEncoding
             // 
             resources.ApplyResources(this.cbScreenRecordTwoPassEncoding, "cbScreenRecordTwoPassEncoding");
@@ -2120,13 +2131,6 @@
             this.tttvMain.TreeViewFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.tttvMain.TreeViewSize = 190;
             this.tttvMain.TabChanged += new ShareX.HelpersLib.TabToTreeView.TabChangedEventHandler(this.tttvMain_TabChanged);
-            // 
-            // cbScreenRecordTransparentRegion
-            // 
-            resources.ApplyResources(this.cbScreenRecordTransparentRegion, "cbScreenRecordTransparentRegion");
-            this.cbScreenRecordTransparentRegion.Name = "cbScreenRecordTransparentRegion";
-            this.cbScreenRecordTransparentRegion.UseVisualStyleBackColor = true;
-            this.cbScreenRecordTransparentRegion.CheckedChanged += new System.EventHandler(this.cbScreenRecordTransparentRegion_CheckedChanged);
             // 
             // TaskSettingsForm
             // 
