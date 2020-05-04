@@ -70,6 +70,20 @@ namespace ShareX
         public bool OverrideCustomUploader = false;
         public int CustomUploaderIndex = 0;
 
+        public bool OverrideScreenshotsFolder = false;
+        public string ScreenshotsFolder = "";
+
+        public string GetScreenshotsFolder()
+        {
+            if (OverrideScreenshotsFolder && !string.IsNullOrEmpty(ScreenshotsFolder))
+            {
+                string screenshotsFolderPath = NameParser.Parse(NameParserType.FolderPath, ScreenshotsFolder);
+                return Helpers.GetAbsolutePath(screenshotsFolderPath);
+            }
+
+            return Program.ScreenshotsFolder;
+        }
+
         public bool UseDefaultGeneralSettings = true;
         public TaskSettingsGeneral GeneralSettings = new TaskSettingsGeneral();
 
@@ -148,20 +162,6 @@ namespace ShareX
                 return UseDefaultAfterCaptureJob && UseDefaultAfterUploadJob && UseDefaultDestinations && !OverrideFTP && !OverrideCustomUploader && UseDefaultGeneralSettings &&
                     UseDefaultImageSettings && UseDefaultCaptureSettings && UseDefaultUploadSettings && UseDefaultActions && UseDefaultToolsSettings &&
                     UseDefaultAdvancedSettings && !WatchFolderEnabled;
-            }
-        }
-
-        public string CaptureFolder
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(AdvancedSettings.CapturePath))
-                {
-                    string captureFolderPath = NameParser.Parse(NameParserType.FolderPath, AdvancedSettings.CapturePath);
-                    return Helpers.GetAbsolutePath(captureFolderPath);
-                }
-
-                return Program.ScreenshotsFolder;
             }
         }
 
@@ -429,9 +429,6 @@ namespace ShareX
         Editor(typeof(WavFileNameEditor), typeof(UITypeEditor))]
         public string CustomCaptureSoundPath { get; set; }
 
-        [Category("Sound"), DefaultValue(""), Description("If this text is not empty then when the screen is captured text to speech engine will say the phrase entered instead of playing the default sound.")]
-        public string SpeechCapture { get; set; }
-
         [Category("Sound"), DefaultValue(false), Description("Enable/disable custom task complete sound.")]
         public bool UseCustomTaskCompletedSound { get; set; }
 
@@ -439,19 +436,12 @@ namespace ShareX
         Editor(typeof(WavFileNameEditor), typeof(UITypeEditor))]
         public string CustomTaskCompletedSoundPath { get; set; }
 
-        [Category("Sound"), DefaultValue(""), Description("If this text is not empty then when a task is completed text to speech engine will say the phrase entered instead of playing the default sound.")]
-        public string SpeechTaskCompleted { get; set; }
-
         [Category("Sound"), DefaultValue(false), Description("Enable/disable custom error sound.")]
         public bool UseCustomErrorSound { get; set; }
 
         [Category("Sound"), DefaultValue(""), Description("Error sound file path."),
         Editor(typeof(WavFileNameEditor), typeof(UITypeEditor))]
         public string CustomErrorSoundPath { get; set; }
-
-        [Category("Paths"), Description("Custom capture path takes precedence over path configured in Application configuration."),
-        Editor(typeof(DirectoryNameEditor), typeof(UITypeEditor))]
-        public string CapturePath { get; set; }
 
         [Category("Capture"), DefaultValue(false), Description("Disable annotation support in region capture.")]
         public bool RegionCaptureDisableAnnotation { get; set; }
@@ -567,6 +557,9 @@ namespace ShareX
 
         [Category("Name pattern"), DefaultValue(50), Description("Maximum name pattern title (%t) length for file name.")]
         public int NamePatternMaxTitleLength { get; set; }
+
+        // TEMP: For backward compatibility
+        public string CapturePath;
 
         public TaskSettingsAdvanced()
         {

@@ -149,6 +149,8 @@
     <Compile Include="Helpers\JsonHelpers.cs" />
     <Compile Include="ImageFilesCache.cs" />
     <Compile Include="PointInfo.cs" />
+    <Compile Include="Random\RandomCrypto.cs" />
+    <Compile Include="Random\RandomFast.cs" />
     <Compile Include="SevenZipManager.cs" />
     <Compile Include="Input\HotkeyForm.cs">
       <SubType>Form</SubType>
@@ -157,7 +159,9 @@
     <Compile Include="Input\KeyboardHook.cs" />
     <Compile Include="NameParser\CodeMenuEntryActions.cs" />
     <Compile Include="ClipboardFormat.cs" />
-    <Compile Include="NameParser\CodeMenu.cs" />
+    <Compile Include="NameParser\CodeMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ColorMatrixManager.cs" />
     <Compile Include="Colors\CMYK.cs" />
     <Compile Include="Colors\ColorEventHandler.cs" />

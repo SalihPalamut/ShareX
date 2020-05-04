@@ -1436,7 +1436,7 @@ namespace ShareX.HelpersLib
             {
                 for (int x = 0; x < horizontalTornCount - 1; x++)
                 {
-                    points.Add(new Point(tornRange * x, MathHelpers.Random(0, tornDepth)));
+                    points.Add(new Point(tornRange * x, RandomFast.Next(0, tornDepth)));
                 }
             }
             else
@@ -1449,7 +1449,7 @@ namespace ShareX.HelpersLib
             {
                 for (int y = 0; y < verticalTornCount - 1; y++)
                 {
-                    points.Add(new Point(bmp.Width - 1 - MathHelpers.Random(0, tornDepth), tornRange * y));
+                    points.Add(new Point(bmp.Width - 1 - RandomFast.Next(0, tornDepth), tornRange * y));
                 }
             }
             else
@@ -1462,7 +1462,7 @@ namespace ShareX.HelpersLib
             {
                 for (int x = 0; x < horizontalTornCount - 1; x++)
                 {
-                    points.Add(new Point(bmp.Width - 1 - (tornRange * x), bmp.Height - 1 - MathHelpers.Random(0, tornDepth)));
+                    points.Add(new Point(bmp.Width - 1 - (tornRange * x), bmp.Height - 1 - RandomFast.Next(0, tornDepth)));
                 }
             }
             else
@@ -1475,7 +1475,7 @@ namespace ShareX.HelpersLib
             {
                 for (int y = 0; y < verticalTornCount - 1; y++)
                 {
-                    points.Add(new Point(MathHelpers.Random(0, tornDepth), bmp.Height - 1 - (tornRange * y)));
+                    points.Add(new Point(RandomFast.Next(0, tornDepth), bmp.Height - 1 - (tornRange * y)));
                 }
             }
             else
@@ -1517,16 +1517,16 @@ namespace ShareX.HelpersLib
 
                 while (y < bmp.Height)
                 {
-                    Rectangle sourceRect = new Rectangle(0, y, bmp.Width, MathHelpers.Random(minSliceHeight, maxSliceHeight));
+                    Rectangle sourceRect = new Rectangle(0, y, bmp.Width, RandomFast.Next(minSliceHeight, maxSliceHeight));
                     Rectangle destRect = sourceRect;
 
-                    if (MathHelpers.Random(1) == 0) // Shift left
+                    if (RandomFast.Next(1) == 0) // Shift left
                     {
-                        destRect.X = MathHelpers.Random(-maxSliceShift, -minSliceShift);
+                        destRect.X = RandomFast.Next(-maxSliceShift, -minSliceShift);
                     }
                     else // Shift right
                     {
-                        destRect.X = MathHelpers.Random(minSliceShift, maxSliceShift);
+                        destRect.X = RandomFast.Next(minSliceShift, maxSliceShift);
                     }
 
                     g.DrawImage(bmp, destRect, sourceRect, GraphicsUnit.Pixel);
@@ -1766,7 +1766,7 @@ namespace ShareX.HelpersLib
                                 x = 0;
                                 break;
                             case ImageCombinerAlignment.Center:
-                                x = width / 2 - image.Width / 2;
+                                x = (width / 2) - (image.Width / 2);
                                 break;
                             case ImageCombinerAlignment.RightOrBottom:
                                 x = width - image.Width;
@@ -1785,7 +1785,7 @@ namespace ShareX.HelpersLib
                                 y = 0;
                                 break;
                             case ImageCombinerAlignment.Center:
-                                y = height / 2 - image.Height / 2;
+                                y = (height / 2) - (image.Height / 2);
                                 break;
                             case ImageCombinerAlignment.RightOrBottom:
                                 y = height - image.Height;

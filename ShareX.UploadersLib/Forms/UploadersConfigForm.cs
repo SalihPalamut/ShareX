@@ -228,6 +228,7 @@ namespace ShareX.UploadersLib
 
             if (OAuth2Info.CheckOAuth(Config.GooglePhotosOAuth2Info))
             {
+                oauth2Picasa.UserInfo = Config.GooglePhotosUserInfo;
                 oauth2Picasa.Status = OAuthLoginStatus.LoginSuccessful;
                 btnPicasaRefreshAlbumList.Enabled = true;
             }
@@ -638,6 +639,8 @@ namespace ShareX.UploadersLib
             txtSeafileLibraryPassword.ReadOnly = Config.SeafileIsLibraryEncrypted;
             btnSeafileLibraryPasswordValidate.Enabled = !Config.SeafileIsLibraryEncrypted;
             cbSeafileCreateShareableURL.Checked = Config.SeafileCreateShareableURL;
+            cbSeafileCreateShareableURLRaw.Checked = Config.SeafileCreateShareableURLRaw;
+            cbSeafileCreateShareableURLRaw.Enabled = cbSeafileCreateShareableURL.Checked;
             cbSeafileIgnoreInvalidCert.Checked = Config.SeafileIgnoreInvalidCert;
             nudSeafileExpireDays.SetValue(Config.SeafileShareDaysToExpire);
             txtSeafileSharePassword.Text = Config.SeafileSharePassword;
@@ -1045,16 +1048,32 @@ namespace ShareX.UploadersLib
         {
             OAuth2Info oauth = new OAuth2Info(APIKeys.GoogleClientID, APIKeys.GoogleClientSecret);
             Config.GooglePhotosOAuth2Info = OAuth2Open(new GooglePhotos(oauth));
+            Config.GooglePhotosUserInfo = null;
         }
 
         private void oauth2Picasa_CompleteButtonClicked(string code)
         {
-            btnPicasaRefreshAlbumList.Enabled = OAuth2Complete(new GooglePhotos(Config.GooglePhotosOAuth2Info), code, oauth2Picasa);
+            GooglePhotos googlePhotos = new GooglePhotos(Config.GooglePhotosOAuth2Info);
+            bool result = OAuth2Complete(googlePhotos, code, oauth2Picasa);
+            if (result)
+            {
+                try
+                {
+                    Config.GooglePhotosUserInfo = googlePhotos.GetUserInfo();
+                    oauth2Picasa.UserInfo = Config.GooglePhotosUserInfo;
+                }
+                catch (Exception e)
+                {
+                    e.ShowError();
+                }
+            }
+            btnPicasaRefreshAlbumList.Enabled = result;
         }
 
         private void oauth2Picasa_ClearButtonClicked()
         {
             Config.GooglePhotosOAuth2Info = null;
+            Config.GooglePhotosUserInfo = null;
         }
 
         private void oauth2Picasa_RefreshButtonClicked()
@@ -2579,6 +2598,12 @@ namespace ShareX.UploadersLib
         private void cbSeafileCreateShareableURL_CheckedChanged(object sender, EventArgs e)
         {
             Config.SeafileCreateShareableURL = cbSeafileCreateShareableURL.Checked;
+            cbSeafileCreateShareableURLRaw.Enabled = cbSeafileCreateShareableURL.Checked;
+        }
+
+        private void cbSeafileCreateShareableURLRaw_CheckedChanged(object sender, EventArgs e)
+        {
+            Config.SeafileCreateShareableURLRaw = cbSeafileCreateShareableURLRaw.Checked;
         }
 
         private void cbSeafileIgnoreInvalidCert_CheckedChanged(object sender, EventArgs e)

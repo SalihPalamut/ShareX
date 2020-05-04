@@ -315,10 +315,20 @@ namespace ShareX.ScreenCaptureLib
                 {
                     Rectangle sourceRect = new Rectangle(0, 0, Canvas.Width, Canvas.Height);
 
-                    using (Bitmap checkers = ImageHelpers.DrawCheckers(Canvas.Width, Canvas.Height, ShareXResources.Theme.CheckerSize,
-                        ShareXResources.Theme.CheckerColor, ShareXResources.Theme.CheckerColor2))
+                    if (ShareXResources.Theme.CheckerSize > 0)
                     {
-                        g.DrawImage(checkers, sourceRect);
+                        using (Bitmap checkers = ImageHelpers.DrawCheckers(Canvas.Width, Canvas.Height, ShareXResources.Theme.CheckerSize,
+                            ShareXResources.Theme.CheckerColor, ShareXResources.Theme.CheckerColor2))
+                        {
+                            g.DrawImage(checkers, sourceRect);
+                        }
+                    }
+                    else
+                    {
+                        using (Brush canvasBrush = new SolidBrush(ShareXResources.Theme.CheckerColor))
+                        {
+                            g.FillRectangle(canvasBrush, sourceRect);
+                        }
                     }
 
                     g.DrawImage(Canvas, sourceRect);
@@ -697,7 +707,10 @@ namespace ShareX.ScreenCaptureLib
                 UpdateCenterOffset();
             }
 
-            borderDotPen.DashOffset = (float)timerStart.Elapsed.TotalSeconds * -15;
+            if (Options.EnableAnimations)
+            {
+                borderDotPen.DashOffset = (float)timerStart.Elapsed.TotalSeconds * -15;
+            }
 
             ShapeManager.Update();
         }

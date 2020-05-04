@@ -73,6 +73,7 @@ namespace ShareX.UploadersLib
         #region Google Photos
 
         public OAuth2Info GooglePhotosOAuth2Info = null;
+        public OAuthUserInfo GooglePhotosUserInfo = null;
         public string GooglePhotosAlbumID = "";
         public bool GooglePhotosIsPublic = false;
 
@@ -358,6 +359,7 @@ namespace ShareX.UploadersLib
         public bool SeafileIsLibraryEncrypted = false;
         public string SeafileEncryptedLibraryPassword = "";
         public bool SeafileCreateShareableURL = true;
+        public bool SeafileCreateShareableURLRaw = false;
         public bool SeafileIgnoreInvalidCert = false;
         public int SeafileShareDaysToExpire = 0;
         public string SeafileSharePassword = "";

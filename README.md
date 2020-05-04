@@ -21,6 +21,7 @@
 [![Downloads](https://img.shields.io/github/downloads/ShareX/ShareX/latest/total.svg?label=Downloads&maxAge=60)](https://getsharex.com/downloads/)
 [![Discord](https://discordapp.com/api/guilds/194170124859736065/widget.png)](https://discord.gg/ShareX)
 
+<<<<<<< HEAD
 [![Screenshot](/Imgs/animation.gif)](https://sites.google.com/view/slhtech/)
 
 ### For further information check [getsharex.com](https://getsharex.com)
